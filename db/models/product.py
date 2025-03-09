@@ -15,3 +15,4 @@ class Product(SQLModel):
     def price(cls, v):
         if v <= 0:
             raise ValueError('Price must be over zero!!!')
+        return v

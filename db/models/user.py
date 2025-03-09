@@ -17,3 +17,12 @@ class User(SQLModel, table=True):
     def name(cls, v):
         if not str(v).isalpha:
             raise ValueError("Name must include only alphabet symbols!!!")
+        return v
+
+    
+    @field_validator("password")
+    @classmethod
+    def password(cls,v):
+        if not re.search("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"):
+            raise ValueError("Your password cant go through validation")
+        return v
